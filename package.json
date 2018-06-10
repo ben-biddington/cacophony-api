@@ -43,7 +43,8 @@
     "winston": "^1.0.1"
   },
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "eslint": "^4.19.1",
+    "mocha": "^5.2.0"
   },
   "scripts": {
     "lint": "eslint --ignore-path .gitignore ."
