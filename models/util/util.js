@@ -319,12 +319,43 @@ function userCanEdit(id, user) {
 }
 
 function openS3() {
-  return new AWS.S3({
+    return new FakeStorage();
+    
+    return new AWS.S3({
     endpoint: config.s3.endpoint,
     accessKeyId: config.s3.publicKey,
     secretAccessKey: config.s3.privateKey,
     s3ForcePathStyle: true, // needed for minio
   });
+}
+
+class Thenable {
+    constructor(p) {
+        this._promise = p; 
+    }
+
+    promise() {
+        return this._promise;
+    }
+}
+
+class FakeStorage {
+    upload(params, callback) {
+        console.log(`Uploading ${params} with ${callback}`)
+        if (callback) {
+            callback(null);
+        }
+
+        return new Thenable(new Promise((resolve, reject) => {
+            console.log(`Resolving promise`);
+            resolve(true);
+        }));
+    }
+
+    deleteObject(params, callback) {
+        console.log(`Deleting ${params}`)
+        callback(null);
+    }
 }
 
 function saveFile(file) {
