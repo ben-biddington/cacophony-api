@@ -1,25 +1,15 @@
 #!/bin/bash
 set -e
-echo "Starting up container"
-echo "Starting postgres"
-echo "listen_addresses = '*'"                                                >> /etc/postgresql/9.5/main/postgresql.conf
 
-#cat /etc/postgresql/9.5/main/postgresql.conf
-#cat /etc/postgresql/9.5/main/pg_hba.conf
+echo "listen_addresses = '*'" >> /etc/postgresql/9.5/main/postgresql.conf
 
 service postgresql restart
-#sudo -i -u postgres
-sudo -i -u postgres whoami
 
-sudo -i -u postgres psql -c "CREATE USER test"
+sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
+sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
+sudo -i -u postgres psql -c "CREATE DATABASE cacophony WITH OWNER test;"
+sudo -i -u postgres psql cacophony -c "CREATE EXTENSION postgis"
 
-sudo -i -u postgres psql -c "CREATE DATABASE cacophonytest WITH OWNER test;"
-#RUN \c [database]
-#psql -c "CREATE EXTENSION postgis"
+echo "[hit enter key to exit] or run 'docker stop <container>'"
 
-#echo "Database created"
-#sudo -i -u root
-echo whoami
-node Server.js
-
-
+read
