@@ -57,7 +57,7 @@ log.info("Connecting to database.....");
 models.sequelize
   .authenticate()
   .then(() => log.info("Connected to database."))
-  .then(() => checkS3Connection())
+  //.then(() => checkS3Connection())
   .then(() => openHttpServer(app))
   .catch(function(error) {
     log.error(error);
