@@ -3,7 +3,7 @@ language: shell
 install:
  - sudo apt-get update
  - sudo apt-get -y install postgresql-9.5 postgresql-client-9.5 postgresql-contrib-9.5 postgresql-server-dev-9.5 postgis
- - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common
+ - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python-pip
  - curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
  - sudo apt-get install -y nodejs
  - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.5/main/postgresql.conf
@@ -21,6 +21,8 @@ install:
  - ./minio server .data &> miniolog &
  - cat miniolog
  - node Server.js &
+ - python -m virtualenv env
+ - source env/bin/activate
 script:
  - cd test
  - pytest -s 
