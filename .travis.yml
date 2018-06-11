@@ -1,6 +1,30 @@
-language: node_js
-node_js:
-  - "8.9.4"
+language: shell
 
+install:
+ - sudo apt-get update
+ - sudo apt-get -y install postgresql-9.5 postgresql-client-9.5 postgresql-contrib-9.5 postgresql-server-dev-9.5 postgis
+ - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip
+ - curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+ - sudo apt-get install -y nodejs
+ - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.5/main/postgresql.conf
+ - sudo service postgresql restart
+ - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
+ - sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
+ - sudo -i -u postgres psql -c "CREATE DATABASE cacophonytest WITH OWNER test;"
+ - sudo -i -u postgres psql cacophonytest -c "CREATE EXTENSION postgis"
+ - cp config/app_test_TEMPLATE.js config/app.js
+ - npm install
+ - node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app.js
+ - wget https://dl.minio.io/server/minio/release/linux-amd64/minio
+ - chmod +x minio
+ - mkdir .data
+ - ./minio server .data &> miniolog &
+ - cat miniolog
+ - node Server.js &
 script:
-  - npm run lint
+ - cd test 
+ - sudo pip3 install virtualenv
+ - virtualenv env && source env/bin/activate
+ - pip3 install -r requirements.txt
+ - pytest -s 
+  
