@@ -15,6 +15,10 @@ install:
  - cp config/app_test_TEMPLATE.js config/app.js
  - npm install
  - node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app.js
+ - wget https://dl.minio.io/server/minio/release/linux-amd64/minio
+ - chmod +x minio
+ - mkdir .data
+ - ./minio server .data &> /dev/null
  - node Server.js
 script:
  - cd test
