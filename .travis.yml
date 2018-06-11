@@ -18,7 +18,7 @@ install:
  - wget https://dl.minio.io/server/minio/release/linux-amd64/minio
  - chmod +x minio
  - mkdir .data
- - ./minio server .data &> /dev/null
+ - ./minio server .data &> /dev/null &
  - node Server.js &
 script:
  - cd test
