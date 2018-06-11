@@ -1,6 +1,19 @@
-language: node_js
-node_js:
-  - "8.9.4"
+language: shell
 
+install:
+ - sudo apt-get update
+ - sudo apt-get -y install postgresql-9.5 postgresql-client-9.5 postgresql-contrib-9.5 postgresql-server-dev-9.5 postgis
+ - sudo apt-get -y install curl sudo make build-essential g++
+ - curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+ - sudo apt-get install -y nodejs
+ - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.5/main/postgresql.conf
+ - sudo service postgresql restart
+ - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
+ - sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
+ - sudo -i -u postgres psql -c "CREATE DATABASE cacophony WITH OWNER test;"
+ - sudo -i -u postgres psql cacophony -c "CREATE EXTENSION postgis"
+ - cp config/app_TEMPLATE.js config/app.js
 script:
-  - npm run lint
+  - npm install
+  - node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app.js
+  - node Server.js
