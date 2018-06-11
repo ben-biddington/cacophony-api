@@ -12,7 +12,7 @@ install:
  - sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
  - sudo -i -u postgres psql -c "CREATE DATABASE cacophony WITH OWNER test;"
  - sudo -i -u postgres psql cacophony -c "CREATE EXTENSION postgis"
- - cp config/app_TEMPLATE.js config/app.js
+ - cp config/app_test_TEMPLATE.js config/app.js
 script:
   - npm install
   - node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app.js

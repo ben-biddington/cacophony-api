@@ -23,8 +23,8 @@ const fileProcessing = {
 
 // ======= Database settings =======
 const database = {
-  username: "REQUIRED",
-  password: "REQUIRED",
+  username: "test",
+  password: "test",
   database: "cacophonytest",
   host: "localhost",
   dialect: "postgres"
