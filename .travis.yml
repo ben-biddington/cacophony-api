@@ -19,7 +19,7 @@ install:
  - chmod +x minio
  - mkdir .data
  - ./minio server .data &> /dev/null
- - node Server.js
+ - node Server.js &
 script:
  - cd test
  - pytest -s 
