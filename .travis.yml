@@ -13,7 +13,10 @@ install:
  - sudo -i -u postgres psql -c "CREATE DATABASE cacophony WITH OWNER test;"
  - sudo -i -u postgres psql cacophony -c "CREATE EXTENSION postgis"
  - cp config/app_test_TEMPLATE.js config/app.js
+ - npm install
+ - node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app.js
+ - node Server.js
 script:
-  - npm install
-  - node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app.js
-  - node Server.js
+ - cd test
+ - pytest -s 
+  
