@@ -26,4 +26,5 @@ sudo docker cp . cacophony-api-test:/
 sudo docker exec cacophony-api-test bash -c "$@ rm -r /node_modules"
 sudo docker exec cacophony-api-test bash -c "$@ echo 'npm install...'        && npm install &> echo '.'"
 sudo docker exec cacophony-api-test bash -c "$@ echo 'migrating database...' && node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app.js"
+sudo docker exec cacophony-api-test bash -c "$@ echo 'starting minio...'     && ./minio server /mnt/data &> 1 &"
 sudo docker exec cacophony-api-test bash -c "$@ node /Server.js"
