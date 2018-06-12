@@ -22,5 +22,6 @@ COPY docker-entrypoint.sh /
 
 EXPOSE 1080
 EXPOSE 9001
+EXPOSE 2008
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
