@@ -11,6 +11,7 @@ install:
  - sudo apt-get install -y nodejs
  - echo "listen_addresses = '*'" >> sudo /etc/postgresql/10.1/main/postgresql.conf
  - sudo service postgresql restart
+ - sudo service postgresql status
  - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
  - sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
  - sudo -i -u postgres psql -c "CREATE DATABASE cacophonytest WITH OWNER test;"
