@@ -5,7 +5,7 @@ FROM ubuntu
 
 RUN apt-get update
 RUN apt-get install tzdata && echo "New Zealand/Auckland" | tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
-RUN apt-get -y install postgresql postgresql-client postgresql-contrib postgresql-server-dev-all postgis
+RUN apt-get -y install postgresql-10 postgresql-client-10 postgresql-contrib-10 postgresql-server-dev-10 postgis
 RUN apt-get -y install curl wget sudo make build-essential g++
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
