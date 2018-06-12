@@ -22,7 +22,7 @@ sudo docker exec cacophony-api-test bash -c "$@ rm -r /node_modules"
 sudo docker exec cacophony-api-test bash -c "$@ echo 'npm install...'        && npm install 2> /dev/null"
 sudo docker exec cacophony-api-test bash -c "$@ echo 'migrating database...' && node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app_test_default.js"
 sudo docker exec cacophony-api-test bash -c "sudo -i -u postgres psql cacophonytest -c \"\dt;\""
-sudo docker exec cacophony-api-test bash -c "sudo -i -u postgres psql cacophonytest -f docker-seed.sh"
+sudo docker exec cacophony-api-test bash -c "sudo -i -u postgres psql cacophonytest -f test/db-seed.sql"
 sudo docker exec cacophony-api-test bash -c "$@ MINIO_ACCESS_KEY=minio MINIO_SECRET_KEY=miniostorage ./minio server --address :9001 .data &> miniolog &"
 sudo docker exec cacophony-api-test bash -c "$@ sleep 10" # Allowing minio to initialize
 sudo docker exec cacophony-api-test bash -c "./mc config host add myminio http://127.0.0.1:9001 minio miniostorage"
