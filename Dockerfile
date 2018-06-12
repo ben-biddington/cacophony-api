@@ -5,7 +5,7 @@ FROM ubuntu
 
 RUN apt-get update
 RUN apt-get -y install postgresql postgresql-client postgresql-contrib postgresql-server-dev-all postgis
-RUN apt-get -y install curl wget vim sudo make build-essential g++
+RUN apt-get -y install curl wget sudo make build-essential g++
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
