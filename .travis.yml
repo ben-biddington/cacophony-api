@@ -2,11 +2,11 @@ anguage: shell
 
 install:
  - sudo apt-get update
- - sudo apt-get -y install postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3 postgresql-server-dev-all postgis
+ - sudo apt-get -y install postgresql-9.2 postgresql-client-9.2 postgresql-contrib-9.2 postgresql-server-dev-all postgis
  - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip
  - curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
  - sudo apt-get install -y nodejs
- - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.5/main/postgresql.conf
+ - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.2/main/postgresql.conf
  - sudo service postgresql restart
  - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
  - sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
