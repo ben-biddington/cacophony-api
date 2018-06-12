@@ -4,7 +4,7 @@
 FROM ubuntu
 
 RUN apt-get update
-RUN apt-get -y install postgresql-9.5 postgresql-client-9.5 postgresql-contrib-9.5 postgresql-server-dev-9.5 postgis
+RUN apt-get -y install postgresql postgresql-client postgresql-contrib postgresql-server-dev-all postgis
 RUN apt-get -y install curl wget vim sudo make build-essential g++
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
