@@ -3,6 +3,8 @@
 
 FROM ubuntu
 
+RUN echo "New Zealand/Auckland" | tee /etc/timezone
+
 RUN apt-get update
 RUN apt-get -y install postgresql postgresql-client postgresql-contrib postgresql-server-dev-all postgis
 RUN apt-get -y install curl wget sudo make build-essential g++
