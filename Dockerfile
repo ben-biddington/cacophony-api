@@ -1,12 +1,17 @@
 # Build:                   sudo docker build --no-cache . -t cacophony-api
 # Run interactive session: sudo docker run -it cacophony-api
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 RUN apt-get update
-RUN apt-get install tzdata && echo "New Zealand/Auckland" | tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
-RUN apt-get -y install postgis
+RUN apt-get install -y apt-utils
+
+RUN apt-get install -y tzdata
+RUN echo "Pacific/Auckland" > /etc/timezone
+RUN ln -sf /usr/share/zoneinfo/Pacific/Auckland /etc/localtime
+
 RUN apt-get -y install curl wget sudo make build-essential g++
+RUN apt-get -y install postgis postgresql-server-dev-9.5
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
