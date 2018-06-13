@@ -10,8 +10,6 @@ install:
  - ls /etc/postgresql
  - pg_config --version
  - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip
- - curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
- - sudo apt-get install -y nodejs
  - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.2/main/postgresql.conf
  - sudo service postgresql status
  - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
