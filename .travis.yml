@@ -19,11 +19,8 @@ services:
 
 install:
  - sudo apt-get update
- - ls /etc/postgresql
- - pg_config --version
  - sudo apt-get -y install curl sudo make build-essential g++ postgresql-9.4-postgis-2.3
  - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.2/main/postgresql.conf
- - sudo service postgresql status
  - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
  - sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
  - sudo -i -u postgres psql -c "CREATE DATABASE cacophonytest WITH OWNER test;"
