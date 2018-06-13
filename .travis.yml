@@ -46,4 +46,5 @@ script:
  - sudo pip install virtualenv
  - virtualenv env && source env/bin/activate
  - sudo pip install -r requirements.txt
+ - pytest --version
  - pytest -s  
