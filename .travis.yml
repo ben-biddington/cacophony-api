@@ -33,7 +33,7 @@ install:
  - sleep 10
  - ./mc config host add myminio http://127.0.0.1:9001 minio miniostorage
  - ./mc mb myminio/cacophony
- - node Server.js &
+ - node Server.js --config=config/app_test_default.js &
  
 script:
  - cd test 
