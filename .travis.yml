@@ -3,17 +3,18 @@ dist: trusty
 language: node_js
  - '8'
 
+env:
+  global:
+  - PGPORT=5432
+
 services:
   - postgresql
-
-before_install:
-  - psql -U postgres -c "create extension postgis"
 
 install:
  - sudo apt-get update
  - ls /etc/postgresql
  - pg_config --version
- - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip
+ - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip postgresql-9.2-postgis-2.3
  - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.2/main/postgresql.conf
  - sudo service postgresql status
  - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
