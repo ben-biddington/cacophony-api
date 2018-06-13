@@ -1,7 +1,7 @@
 # Build:                   sudo docker build --no-cache . -t cacophony-api
 # Run interactive session: sudo docker run -it cacophony-api
 
-FROM ubuntu
+FROM ubuntu:16.04
 
 RUN apt-get update
 RUN apt-get install tzdata && echo "New Zealand/Auckland" | tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
