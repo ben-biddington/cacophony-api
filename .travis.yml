@@ -1,43 +1,17 @@
-dist: trusty
+sudo: required
 
-addons:
-  postgresql: "9.4"
+services:
+  - docker
   
-language: node_js
- - '8'
+dist: trusty
 
 language: python
 python:
   - "3.6"
   
-env:
-  global:
-  - PGPORT=5432
-
-services:
-  - postgresql
-
 install:
- - sudo apt-get update
- - sudo apt-get -y install curl sudo make build-essential g++ postgresql-9.4-postgis-2.3
- - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.2/main/postgresql.conf
- - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
- - sudo -i -u postgres psql -c "CREATE USER admin_test with password 'admin_test'"
- - sudo -i -u postgres psql -c "CREATE DATABASE cacophonytest WITH OWNER test;"
- - sudo -i -u postgres psql cacophonytest -c "CREATE EXTENSION postgis"
- - npm install
- - node_modules/sequelize-cli/bin/sequelize db:migrate --config config/app_test_default.js
- - wget https://dl.minio.io/server/minio/release/linux-amd64/minio
- - chmod +x minio
- - wget https://dl.minio.io/client/mc/release/linux-amd64/mc
- - chmod +x mc
- - cat "$(pwd)/test/db-seed.sql" | sudo -i -u postgres psql cacophonytest -f -
- - MINIO_ACCESS_KEY=minio MINIO_SECRET_KEY=miniostorage ./minio server --address :9001 .data &> miniolog &
- - sleep 10
- - ./mc config host add myminio http://127.0.0.1:9001 minio miniostorage
- - ./mc mb myminio/cacophony
- - node Server.js --config=config/app_test_default.js &
- 
+ - ./docker-start.sh &
+
 script:
  - cd test 
  - pip install virtualenv
