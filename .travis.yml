@@ -1,5 +1,8 @@
-anguage: shell
+language: shell
 
+services:
+  - postgresql
+  
 install:
  - sudo service postgresql stop
  - sudo apt-get update
