@@ -30,8 +30,7 @@ install:
  - chmod +x minio
  - wget https://dl.minio.io/client/mc/release/linux-amd64/mc
  - chmod +x mc
- - chown postgres "$(pwd)/test/db-seed.sql"
- - sudo -i -u postgres psql cacophonytest -f "$(pwd)/test/db-seed.sql"
+ - cat "$(pwd)/test/db-seed.sql" | sudo -i -u postgres psql cacophonytest -f -
  - MINIO_ACCESS_KEY=minio MINIO_SECRET_KEY=miniostorage ./minio server --address :9001 .data &> miniolog &
  - sleep 10
  - ./mc config host add myminio http://127.0.0.1:9001 minio miniostorage
