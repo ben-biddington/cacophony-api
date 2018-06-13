@@ -2,8 +2,12 @@ dist: trusty
 
 language: node_js
  - '8'
+
 services:
   - postgresql
+
+before_script:
+  - psql -U postgres -c "create extension postgis"
 
 install:
  - sudo apt-get update
