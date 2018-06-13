@@ -1,5 +1,4 @@
 #/bin/bash
-
 if [ -f docker-container-pid ]; then
     pid="$(cat docker-container-pid)"
 
@@ -26,4 +25,10 @@ sudo docker exec cacophony-api-test bash -c "$@ MINIO_ACCESS_KEY=minio MINIO_SEC
 sudo docker exec cacophony-api-test bash -c "$@ sleep 10" # Allowing minio to initialize
 sudo docker exec cacophony-api-test bash -c "./mc config host add myminio http://127.0.0.1:9001 minio miniostorage"
 sudo docker exec cacophony-api-test bash -c "./mc mb myminio/cacophony"
-sudo docker exec cacophony-api-test bash -c "$@ node /Server.js --config=config/app_test_default.js"
+
+if [ "$1" == "--bg" ]; then
+    sudo docker exec cacophony-api-test bash -c "$@ node /Server.js --config=config/app_test_default.js &"
+else
+    sudo docker exec cacophony-api-test bash -c "$@ node /Server.js --config=config/app_test_default.js"
+fi
+
