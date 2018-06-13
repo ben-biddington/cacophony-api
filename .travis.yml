@@ -21,7 +21,7 @@ install:
  - sudo apt-get update
  - ls /etc/postgresql
  - pg_config --version
- - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip postgresql-9.4-postgis-2.3
+ - sudo apt-get -y install curl sudo make build-essential g++ postgresql-9.4-postgis-2.3
  - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.2/main/postgresql.conf
  - sudo service postgresql status
  - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
@@ -46,4 +46,5 @@ script:
  - sudo pip3 install virtualenv
  - virtualenv env && source env/bin/activate
  - sudo pip3 install -r requirements.txt
+ - ls $(pwd)
  - pytest -s  
