@@ -6,6 +6,10 @@ addons:
 language: node_js
  - '8'
 
+language: python
+python:
+  - "3.3"
+  
 env:
   global:
   - PGPORT=5432
