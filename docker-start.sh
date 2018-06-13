@@ -1,4 +1,5 @@
 #/bin/bash
+
 if [ -f docker-container-pid ]; then
     pid="$(cat docker-container-pid)"
 
@@ -14,7 +15,7 @@ if [ -f docker-container-pid ]; then
 fi
 
 sudo docker build . -t cacophony-api
-sudo docker run -itd --rm --name cacophony-api-test -p 1080:1080 -p 9001:9001 cacophony-api | tee > docker-container-pid
+sudo docker run -td --rm --name cacophony-api-test -p 1080:1080 -p 9001:9001 cacophony-api | tee > docker-container-pid
 
 sudo docker cp . cacophony-api-test:/
 sudo docker exec cacophony-api-test bash -c "$@ rm -r /node_modules"
@@ -26,9 +27,10 @@ sudo docker exec cacophony-api-test bash -c "$@ sleep 10" # Allowing minio to in
 sudo docker exec cacophony-api-test bash -c "./mc config host add myminio http://127.0.0.1:9001 minio miniostorage"
 sudo docker exec cacophony-api-test bash -c "./mc mb myminio/cacophony"
 
-if [ "$1" == "--bg" ]; then
-    sudo docker exec cacophony-api-test bash -c "$@ node /Server.js --config=config/app_test_default.js &"
-else
+if [[ -z "$BG" ]]; then
+    echo "Starting server in foreground"
     sudo docker exec cacophony-api-test bash -c "$@ node /Server.js --config=config/app_test_default.js"
+else
+    echo "Starting server in background"
+    sudo docker exec cacophony-api-test bash -c "$@ node /Server.js --config=config/app_test_default.js &> /dev/null &"
 fi
-

@@ -10,7 +10,7 @@ python:
   - "3.6"
   
 install:
- - ./docker-start.sh --bg
+ - BG=1 ./docker-start.sh
 
 script:
  - cd test 
