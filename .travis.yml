@@ -43,8 +43,7 @@ install:
  
 script:
  - cd test 
- - sudo pip3 install virtualenv
+ - sudo pip install virtualenv
  - virtualenv env && source env/bin/activate
- - sudo pip3 install -r requirements.txt
- - ls $(pwd)
+ - sudo pip install -r requirements.txt
  - pytest -s  
