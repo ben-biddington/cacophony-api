@@ -6,7 +6,7 @@ language: node_js
 services:
   - postgresql
 
-before_script:
+before_install:
   - psql -U postgres -c "create extension postgis"
 
 install:
