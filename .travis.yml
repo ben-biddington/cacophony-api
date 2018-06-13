@@ -13,7 +13,7 @@ install:
  - sudo apt-get update
  - ls /etc/postgresql
  - pg_config --version
- - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip postgis
+ - sudo apt-get -y install curl sudo make build-essential g++ python-logilab-common python3-pip
  - echo "listen_addresses = '*'" >> sudo /etc/postgresql/9.2/main/postgresql.conf
  - sudo service postgresql status
  - sudo -i -u postgres psql -c "CREATE USER test with password 'test'"
@@ -33,6 +33,7 @@ install:
  - ./mc config host add myminio http://127.0.0.1:9001 minio miniostorage
  - ./mc mb myminio/cacophony
  - node Server.js &
+ 
 script:
  - cd test 
  - sudo pip3 install virtualenv
